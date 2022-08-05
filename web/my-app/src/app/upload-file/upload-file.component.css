@@ -1,0 +1,42 @@
+table{
+    width: 1000px;
+    padding: 10px;
+    text-align: center;
+}
+
+.red-icon {
+    color: red;
+    padding-right: 5px;
+}
+.invalid {
+    background-color: lightgrey;
+}
+.mat-column-isin {
+    width: 5%;
+    padding: 10px;
+    text-align: center;
+}
+.mat-column-issuer{
+    width: 70%;
+    padding: 10px;
+    text-align: center;
+}
+.mat-column-applicationType{
+    width: 5%;
+    padding: 10px;
+    text-align: center;
+}
+.mat-column-instrumentType{
+    width: 5%;
+    padding: 10px;
+    text-align: center;
+}.mat-column-validationErrors{
+    width: 90%;
+    padding: 10px;
+    text-align: left;
+}
+.mat-column-listingDate{
+    width: 15%;
+    padding: 10px;
+    text-align: center;
+}

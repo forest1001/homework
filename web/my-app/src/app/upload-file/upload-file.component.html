@@ -1,0 +1,83 @@
+<div class="text-center">
+
+    <input class="form-control" type="file"
+           (change)="onChange($event)">
+
+    <button (click)="onUpload()"
+            class="btn btn-success">
+        Upload
+    </button>
+
+</div>
+<!--Flag variable is used here-->
+<div class="container" *ngIf="serverErr">
+    <h3>{{serverErr}}</h3>
+</div>
+
+<br />
+<div [hidden]="!dataSource.data.length">
+
+    <mat-tab-group>
+        <mat-tab label="Valid">
+            <div>
+                <mat-form-field>
+                    <mat-label>ISIN:</mat-label>
+                    <input (keyup)="applyFilter($event)" matInput placeholder="ISIN">
+                </mat-form-field>
+            </div>
+            <table [dataSource]="dataSource" class="mat-elevation-z20" mat-table matSort>
+                <ng-container matColumnDef="isin">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header> ISIN</th>
+                    <td *matCellDef="let element"
+                        mat-cell> {{element.isin}} </td>
+                </ng-container>
+                <ng-container matColumnDef="issuer">
+                    <th *matHeaderCellDef mat-header-cell>Issuer</th>
+                    <td *matCellDef="let element"
+                        mat-cell> {{element.issuer}} </td>
+                </ng-container>
+                <ng-container matColumnDef="applicationType">
+                    <th *matHeaderCellDef mat-header-cell>Application Type</th>
+                    <td *matCellDef="let element"
+                        mat-cell> {{element.applicationType}} </td>
+                </ng-container>
+                <ng-container matColumnDef="instrumentType">
+                    <th *matHeaderCellDef mat-header-cell>Instrument Type</th>
+                    <td *matCellDef="let element"
+                        mat-cell> {{element.instrumentType}} </td>
+                </ng-container>
+                <ng-container matColumnDef="listingDate">
+                    <th *matHeaderCellDef mat-header-cell>Listing Date</th>
+                    <td *matCellDef="let element"
+                        mat-cell> {{element.listingDate}} </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+            </table>
+        </mat-tab>
+
+        <mat-tab  *ngIf="dataSourceError.data.length">
+            <ng-template mat-tab-label>
+            <mat-icon class="red-icon">error</mat-icon>
+            <span>Ignored lines</span>
+            </ng-template>
+
+            <table [dataSource]="dataSourceError" class="mat-elevation-z20" mat-table>
+
+                <ng-container matColumnDef="lineNumber">
+                    <th *matHeaderCellDef mat-header-cell > CSV line number</th>
+                    <td *matCellDef="let element" mat-cell> {{element.lineNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="validationErrors">
+                    <th *matHeaderCellDef mat-header-cell>Validation Errors</th>
+                    <td *matCellDef="let element" mat-cell> {{element.validationErrors}} </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumnsErr" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumnsErr;" mat-row></tr>
+            </table>
+        </mat-tab>
+
+    </mat-tab-group>
+</div>
